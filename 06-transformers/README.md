@@ -12,8 +12,6 @@ We recommend finishing [05-pytorch](../05-pytorch) first.
 | [05-LoRA-SFT](05-LoRA-SFT.ipynb) | How LoRA works, fine-tuning Qwen3-0.6B with TRL `SFTTrainer` + PEFT, evaluation, merging weights | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tjwei/DataScienceSoftware2026/blob/main/06-transformers/05-LoRA-SFT.ipynb) |
 | [06-Vision-Language](06-Vision-Language.ipynb) | SigLIP 2 text-to-image search and zero-shot classification; Qwen3-VL image description, OCR, information extraction | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tjwei/DataScienceSoftware2026/blob/main/06-transformers/06-Vision-Language.ipynb) |
 | [A1-Neural-CPU](A1-Neural-CPU.ipynb) | Extra: a Transformer that *is* a tiny 8-bit CPU — weights designed by hand (exact, Tracr-style) vs. trained from examples; accuracy, error accumulation, robustness, and whether it could run an NES | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tjwei/DataScienceSoftware2026/blob/main/06-transformers/A1-Neural-CPU.ipynb) |
-| [HW1-Sentiment](HW1-Sentiment.ipynb) | Homework: sentiment classification accuracy challenge (Chinese reviews) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tjwei/DataScienceSoftware2026/blob/main/06-transformers/HW1-Sentiment.ipynb) |
-| [HW2-LoRA-Check-Writer](HW2-LoRA-Check-Writer.ipynb) | Homework: use LoRA to teach Qwen3-0.6B to write numbers as formal Chinese numerals (as on checks) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tjwei/DataScienceSoftware2026/blob/main/06-transformers/HW2-LoRA-Check-Writer.ipynb) |
 
 Some examples use Chinese text on purpose (Chinese NER, Chinese reviews, Chinese numerals) to show multilingual models and a task that small LLMs genuinely get wrong before fine-tuning.
 
@@ -34,7 +32,7 @@ Sections marked `## Q` are exercises; reference solutions are in `q_*.py` and ar
 * `%run -i q_xxx.py` runs a solution
 * `!cat q_xxx.py` shows its code
 
-`zh_numbers.py` generates the Chinese-numeral data used by 05-LoRA-SFT and HW2.
+`zh_numbers.py` generates the Chinese-numeral data used by 05-LoRA-SFT.
 
 ## Notes for the T4 GPU
 
@@ -42,4 +40,4 @@ Sections marked `## Q` are exercises; reference solutions are in `q_*.py` and ar
 * No FlashAttention 2: the default SDPA attention works fine.
 * 15 GB of GPU memory: free it before loading another model with `del model; gc.collect(); torch.cuda.empty_cache()`, or restart the runtime.
 * Colab's preinstalled `torchao` is too old for recent PEFT; the LoRA notebooks uninstall it in their first cell.
-* Tested on a Colab T4 with PyTorch 2.10, transformers 5.22, TRL 1.17 and PEFT 0.21.
+* Tested on a Colab T4 in November 2026 with PyTorch 2.14, transformers 5.22, TRL 1.17 and PEFT 0.21.
