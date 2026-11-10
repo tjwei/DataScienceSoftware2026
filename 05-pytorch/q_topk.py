@@ -6,7 +6,7 @@ def generate_topk(model, idx, max_new_tokens, temperature=1.0, top_k=10, block_s
         logits, _ = model(idx_cond)
         logits = logits[:, -1, :].float() / temperature
         v, _ = torch.topk(logits, top_k)
-        logits[logits < v[:, [-1]]] = float("-inf")    # 比第 k 大還小的都設為 -inf
+        logits[logits < v[:, [-1]]] = float("-inf")    # set everything smaller than the k-th largest to -inf
         probs = F.softmax(logits, dim=-1)
         idx = torch.cat([idx, torch.multinomial(probs, 1)], dim=1)
     return idx

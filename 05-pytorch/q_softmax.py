@@ -1,5 +1,5 @@
 def my_softmax(z):
-    z = z - z.max(dim=1, keepdim=True).values   # 數值穩定：先減掉最大值
+    z = z - z.max(dim=1, keepdim=True).values   # numerical stability: subtract the max first
     e = z.exp()
     return e / e.sum(dim=1, keepdim=True)
 

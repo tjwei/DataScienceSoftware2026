@@ -1,14 +1,14 @@
 from urllib.request import urlopen, Request
 from urllib.parse import quote
-# 以維基百科「臺灣」條目的純文字為例 (使用 Wikipedia API)
-title = "臺灣"
-url = ("https://zh.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&variant=zh-tw&titles="
+# Use the plain text of the Wikipedia article "Taiwan" as an example (via the Wikipedia API)
+title = "Taiwan"
+url = ("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&titles="
        + quote(title))
 data = json.loads(urlopen(Request(url, headers={"User-Agent": "course-example/1.0"})).read())
 text = next(iter(data["query"]["pages"].values()))["extract"]
 docs = [p.strip() for p in text.split("\n") if len(p.strip()) > 30]
-print(len(docs), "段")
+print(len(docs), "paragraphs")
 doc_emb = embedder.encode(docs, batch_size=32, show_progress_bar=True)
 
-for q in ["臺灣最高的山是什麼？", "臺灣的面積大約多大？", "臺灣有哪些原住民族？"]:
+for q in ["What is the highest mountain in Taiwan?", "Roughly how large is Taiwan's area?", "What are the indigenous peoples of Taiwan?"]:
     print(f"👤 {q}\n🤖 {rag(q)}\n")

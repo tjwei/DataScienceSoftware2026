@@ -12,7 +12,7 @@ def finetune(model_id, epochs=2, lr=5e-5, batch_size=32):
     t.train()
     dt = time.perf_counter() - t0
     acc = t.evaluate(data["test"])["eval_accuracy"]
-    print(f"{model_id}: test acc={acc:.4f}, 訓練時間 {dt:.0f}s")
+    print(f"{model_id}: test acc={acc:.4f}, training time {dt:.0f}s")
     del m, t
     torch.cuda.empty_cache()
 

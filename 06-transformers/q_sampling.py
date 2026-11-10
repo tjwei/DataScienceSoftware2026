@@ -8,7 +8,7 @@ def sample(prompt, max_new_tokens=50, temperature=0.7, top_p=0.8):
         probs = logits.softmax(-1)
         sorted_p, sorted_i = probs.sort(descending=True)
         cum = sorted_p.cumsum(-1)
-        keep = cum - sorted_p < top_p          # 保留「加入前累積機率 < top_p」的 token
+        keep = cum - sorted_p < top_p          # keep tokens whose cumulative probability *before* adding them is < top_p
         sorted_p = sorted_p * keep
         choice = torch.multinomial(sorted_p / sorted_p.sum(), 1)
         next_id = sorted_i[choice]
@@ -19,5 +19,5 @@ def sample(prompt, max_new_tokens=50, temperature=0.7, top_p=0.8):
     return tokenizer.decode(ids[0].tolist() + generated, skip_special_tokens=True)
 
 for _ in range(3):
-    print(sample("台灣最高的山是"))
+    print(sample("The highest mountain in Taiwan is"))
     print("-----")

@@ -1,4 +1,4 @@
-# 物件偵測 (object detection) 範例
+# Object detection example
 from PIL import ImageDraw
 detector = pipeline("object-detection", model="PekingU/rtdetr_v2_r18vd", device=device)
 results = detector(img, threshold=0.5)

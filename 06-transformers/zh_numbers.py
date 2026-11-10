@@ -1,4 +1,4 @@
-"""中文數字 <-> 阿拉伯數字 的資料產生工具 (06-transformers/05 與 HW 使用)"""
+"""Data generation tools for Chinese numerals <-> Arabic numbers (used by 06-transformers/05 and the HW)"""
 import random
 
 DIGITS = "零一二三四五六七八九"
@@ -21,7 +21,7 @@ def _section(n):
 
 
 def num2zh(n):
-    """0 <= n < 10**12, 例如 10050 -> 一萬零五十"""
+    """0 <= n < 10**12, e.g. 10050 -> 一萬零五十"""
     if n == 0:
         return "零"
     s, skipped = "", False
@@ -39,7 +39,7 @@ def num2zh(n):
 
 
 def num2zh_upper(n):
-    """大寫 (支票寫法), 例如 3052 -> 參仟零伍拾貳"""
+    """Formal numerals (as written on checks), e.g. 3052 -> 參仟零伍拾貳"""
     s = num2zh(n)
     if s.startswith("十"):
         s = "一" + s
@@ -47,9 +47,9 @@ def num2zh_upper(n):
 
 
 def random_number(rng=random):
-    """位數平均分布的隨機整數"""
+    """Random integer whose number of digits is uniformly distributed"""
     k = rng.randint(1, 8)
     n = rng.randint(10 ** (k - 1), 10**k - 1)
-    if rng.random() < 0.3:  # 多一些含有 0 的數字
+    if rng.random() < 0.3:  # more numbers that contain zeros
         n = int("".join(c if rng.random() < 0.6 else "0" for c in str(n)) or 0)
     return n
