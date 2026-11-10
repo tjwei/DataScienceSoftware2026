@@ -9,4 +9,5 @@ for r in results:
     draw.rectangle([b["xmin"], b["ymin"], b["xmax"], b["ymax"]], outline="red", width=4)
     draw.text((b["xmin"] + 5, b["ymin"] + 5), f"{r['label']} {r['score']:.2f}", fill="red")
 display(im.resize((400, int(400 * im.height / im.width))))
-results
+for r in results:
+    print(f"{r['label']:12s} {r['score']:.2f} {r['box']}")
